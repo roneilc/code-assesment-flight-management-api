@@ -140,24 +140,8 @@ Response:
   "message": "Booking canceled successfully."
 }
 ```
-
-## 4. Database & Configuration
-### Database: PostgreSQL or your choice
-
-Set up a PostgreSQL database and configure the connection details:
-
-#### For Spring Boot (application.properties)
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/flights_db
-spring.datasource.username=user
-spring.datasource.password=password
-spring.jpa.hibernate.ddl-auto=update
-```
-#### For NestJS (.env file)
-```ini
-DATABASE_URL=postgresql://user:password@localhost:5432/flights_db
-JWT_SECRET=mysecretkey
-```
+## 4. API endpoint validations
+Please add approriate api validations for the endpoints
 
 ## 5. API Documentation
 ### Ensure the API is documented using Swagger/OpenAPI.
@@ -178,11 +162,32 @@ Implement basic unit tests for your API:
 npm run test
 ```
 
-## 7. Submission Guidelines
+## 7. Docker
+Provides repo has sample docker compose with postgres db(optional), Please dockerize your application to run with or without database integration.
+
+## 8. Database (Optional)
+### Database: PostgreSQL or your choice of DB
+
+Set up has a sample init_db.sql file and docker PostgreSQL database:
+
+#### Sample For Spring Boot (application.properties)
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/flights_db
+spring.datasource.username=user
+spring.datasource.password=password
+spring.jpa.hibernate.ddl-auto=update
+```
+#### Sample For NestJS (.env file)
+```ini
+DATABASE_URL=postgresql://user:password@localhost:5432/flights_db
+JWT_SECRET=mysecretkey
+```
+
+## 8. Submission Guidelines
 Upload your code to a public GitHub/Gitlab repository or share a ZIP file.
 Ensure the README includes setup instructions.
 Write at least basic unit tests.
-Follow best practices in API design, database handling, and security.
+Follow best practices in API design, datatypes/datastructures choices, database handling(if you're using database), and security.
 
 
-# Good Luck! We look forward to reviewing your submission.
+#### Good Luck! We look forward to reviewing your submission.

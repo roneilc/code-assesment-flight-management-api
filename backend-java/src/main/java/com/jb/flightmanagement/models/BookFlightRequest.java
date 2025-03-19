@@ -8,7 +8,7 @@ import lombok.Data;
 //  }
 
 @Data
-public class CreateFlightResponse {
+public class BookFlightRequest {
 
     private int id;
 

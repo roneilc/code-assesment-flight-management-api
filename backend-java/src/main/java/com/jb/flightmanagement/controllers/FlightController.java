@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jb.flightmanagement.models.CreateFlightResponse;
+
 @RestController
 @RequestMapping("/api")
 public class FlightController {
@@ -21,8 +23,9 @@ public class FlightController {
      * @throws Exception
      */
     @PostMapping("/flights")
-    public String flight() {
-        return "";
+    public CreateFlightResponse createFlight() {
+
+        return new CreateFlightResponse(1,"JB-202","Scheduled");
     }
     
 }

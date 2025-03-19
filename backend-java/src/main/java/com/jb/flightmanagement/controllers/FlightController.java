@@ -1,6 +1,5 @@
 package com.jb.flightmanagement.controllers;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,13 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jb.flightmanagement.models.BookFlightResponse;
 import com.jb.flightmanagement.models.CreateFlightRequest;
 import com.jb.flightmanagement.models.CreateFlightResponse;
 import com.jb.flightmanagement.models.GetFlightResponse;
+import com.jb.flightmanagement.services.FlightService;
 
 @RestController
 @RequestMapping("/api")
 public class FlightController {
+
+
+    private final FlightService _flightService;
+
+    public FlightController(FlightService flightService) {
+        this._flightService = flightService;
+    }
 
     /**
      * Method for creating flights
@@ -27,15 +35,18 @@ public class FlightController {
      * @param destination flight airport code destination
      * @param departureTime flight departure time in format YYY-MM-DDTHH:MM:SSZ
      * @param arrivalTime flight arrival time in format YYY-MM-DDTHH:MM:SSZ
-     * @param capacity number of passengers
+     * @param capacity max number of passengers
      * @return
      * @throws Exception
      */
     @PostMapping("/flights")
-    public CreateFlightResponse createFlight(@Validated @RequestBody CreateFlightRequest request) {
+    public ResponseEntity<CreateFlightResponse> createFlight(@Validated @RequestBody CreateFlightRequest request) {
 
-        // return new CreateFlightResponse(1,"JB-202","Scheduled");
-        return new ResponseEntity<T>(new CreateFlightResponse(1,"JB-202","Scheduled"), HttpStatus.Ok);
+        // if(Stringrequest)
+        // _flightService.createFlight(id);
+
+        CreateFlightResponse response = new CreateFlightResponse(1,"JB-202","Scheduled");
+        return ResponseEntity.ok(response);
 
     }
 
@@ -46,9 +57,11 @@ public class FlightController {
      * @throws Exception
      */
     @GetMapping("/flights/{id}")
-    public GetFlightResponse getFlight() {
+    public ResponseEntity<GetFlightResponse> getFlight() {
 
-        return new GetFlightResponse();
+
+        GetFlightResponse response = new GetFlightResponse();
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -60,24 +73,27 @@ public class FlightController {
      * @throws Exception
      */
     @GetMapping
-    public GetFlightResponse searchFlight(
+    public ResponseEntity<GetFlightResponse> searchFlight(
         @RequestParam(required = true) String origin,
         @RequestParam(required = true) String destination,
         @RequestParam(required = true) String date) {
 
-        return new GetFlightResponse();
+        
+        GetFlightResponse response = new GetFlightResponse();
+        return ResponseEntity.ok(response);
     }
 
     /**
-     * Method for booking flight
+     * Method for booking flights
      * @param id Flight Id
      * @return Flight details
      * @throws Exception
      */
     @PostMapping("/flights/{id}")
-    public GetFlightResponse bookFlight() {
+    public ResponseEntity<GetFlightResponse> bookFlight() {
 
-        return new GetFlightResponse();
+        GetFlightResponse response = new GetFlightResponse();
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -87,11 +103,13 @@ public class FlightController {
      * @throws Exception
      */
     @DeleteMapping("/{id}/bookings/{bookingId}")
-    public ResponseEntity<String> deleteBooking(
+    public ResponseEntity<BookFlightResponse> deleteBooking(
             @PathVariable Long id,
             @PathVariable Long bookingId) {
 
-        return ResponseEntity.ok("Booking " + bookingId + " deleted from flight " + id);
+        BookFlightResponse response = new BookFlightResponse();
+        return ResponseEntity.ok(response);
+
     }
     
 }

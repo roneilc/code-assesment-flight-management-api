@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.jb.flightmanagement.models.CreateFlightRequest;
-import com.jb.flightmanagement.models.Flight;
+import com.jb.flightmanagement.models.flights.CreateFlightRequest;
+import com.jb.flightmanagement.models.flights.Flight;
 import com.jb.flightmanagement.services.FlightService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

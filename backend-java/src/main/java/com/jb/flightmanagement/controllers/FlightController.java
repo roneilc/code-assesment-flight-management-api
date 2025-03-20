@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jb.flightmanagement.models.BookFlightResponse;
-import com.jb.flightmanagement.models.CreateFlightRequest;
-import com.jb.flightmanagement.models.CreateFlightResponse;
-import com.jb.flightmanagement.models.Flight;
-import com.jb.flightmanagement.models.GetFlightResponse;
+import com.jb.flightmanagement.models.bookings.BookFlightResponse;
+import com.jb.flightmanagement.models.flights.CreateFlightRequest;
+import com.jb.flightmanagement.models.flights.CreateFlightResponse;
+import com.jb.flightmanagement.models.flights.Flight;
+import com.jb.flightmanagement.models.flights.GetFlightResponse;
 import com.jb.flightmanagement.services.FlightService;
 
 @RestController

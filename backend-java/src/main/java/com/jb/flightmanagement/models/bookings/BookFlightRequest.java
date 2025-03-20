@@ -1,4 +1,4 @@
-package com.jb.flightmanagement.models;
+package com.jb.flightmanagement.models.bookings;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.jb.flightmanagement.models;
+package com.jb.flightmanagement.models.flights;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

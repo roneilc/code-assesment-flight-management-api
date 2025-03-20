@@ -8,15 +8,15 @@ import com.jb.flightmanagement.models.flights.Flight;
 import com.jb.flightmanagement.repository.FlightRepository;
 
 @Service
-public class FlightService {
+public class BookingService {
 
     private final FlightRepository flightRepository;
 
-    public FlightService(FlightRepository flightRepository) {
+    public BookingService(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
 
-    public Flight createFlight(Flight flight) {
+    public Flight createBooking(Flight flight) {
         // Check if flight exists in database
         if (flightRepository.findByFlightNumber(flight.getFlightNumber()).isPresent()) {
             throw new IllegalArgumentException("Flight exists");
@@ -26,7 +26,7 @@ public class FlightService {
         }
     }
 
-    public Optional<Flight> getFlight(Long id) {
+    public Optional<Flight> cancelBooking(Long id) {
 
         return flightRepository.findById(id);
     }

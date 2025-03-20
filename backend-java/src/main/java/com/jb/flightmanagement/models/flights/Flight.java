@@ -1,4 +1,4 @@
-package com.jb.flightmanagement.models;
+package com.jb.flightmanagement.models.flights;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

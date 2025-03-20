@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot Run with Debugger",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "runtimeExecutable": "./gradlew",
+            "runtimeArgs": ["bootRun"],
+            "port": 5005
+        }
+    ]
+}
+

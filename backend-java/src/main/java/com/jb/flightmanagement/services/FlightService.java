@@ -1,3 +1,7 @@
+package com.jb.flightmanagement.services;
+
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.jb.flightmanagement.models.Flight;
@@ -12,14 +16,18 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
-    public Flight createFlight() {
-        Flight flight = new Flight();
+    public void createFlight(Flight flight) {
 
-        return flightRepository.save(flight);
+        flightRepository.save(flight);
     }
 
-    public Flight cancelFlight(int id) {
+    public Optional<Flight> getFlight(Long id) {
 
-        return flightRepository.delete(id);
+        return flightRepository.findById(id);
+    }
+
+    public void cancelFlight(Long id) {
+
+        flightRepository.deleteById(id);
     }
 }

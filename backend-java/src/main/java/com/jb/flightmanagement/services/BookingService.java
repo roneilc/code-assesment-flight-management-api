@@ -21,25 +21,15 @@ public class BookingService {
         this.flightRepository = flightRepository;
     }
 
-    public Flight createBooking(Flight flight) {
-        // Check if flight exists in database
-        if (flightRepository.findByFlightNumber(flight.getFlightNumber()).isPresent()) {
-            throw new IllegalArgumentException("Flight exists");
-        }
-        else {
-            return flightRepository.save(flight);
-        }
-    }
-
     public Booking createBooking(Long flightId, BookFlightRequest request) {
         // Find flight
-        Optional<Flight> flightOptional = flightRepository.findById(flightId);
+        Optional<Flight> flight = flightRepository.findById(flightId);
 
-        Flight flight = flightOptional.get();
+        Flight bookedFlight = flight.get();
 
         // Create booking
         Booking booking = new Booking();
-        booking.setFlight(flight);
+        booking.setFlight(bookedFlight);
         booking.setPassengerName(request.getPassengerName());
         booking.setSeatClass(request.getSeatClass());
         booking.setStatus("Confirmed");
@@ -47,8 +37,23 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public Optional<Flight> cancelBooking(Long id) {
+    public void cancelBooking(Long flightId, Long bookingId) {
 
-        return flightRepository.findById(id);
+        // Validate flight id
+        Optional<Flight> flightOpt = flightRepository.findById(flightId);
+        if (flightOpt.isEmpty()) {
+            throw new IllegalArgumentException("Flight not found");
+        }
+
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+
+        if (booking.isEmpty()) {
+            throw new IllegalArgumentException("Booking not found");
+        }
+        else {
+            
+            bookingRepository.deleteById(bookingId);
+        }
+
     }
 }

@@ -3,10 +3,14 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Attach Debugger",
-            "request": "attach",
-            "hostName": "localhost",
+            "name": "Spring Boot Run with Debugger",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "runtimeExecutable": "./gradlew",
+            "runtimeArgs": ["bootRun"],
             "port": 5005
         }
     ]
 }
+

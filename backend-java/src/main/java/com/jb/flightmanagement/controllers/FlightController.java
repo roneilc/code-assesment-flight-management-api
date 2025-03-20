@@ -25,7 +25,6 @@ import com.jb.flightmanagement.services.FlightService;
 @RequestMapping("/api")
 public class FlightController {
 
-
     private final FlightService _flightService;
 
     public FlightController(FlightService flightService) {
@@ -98,11 +97,11 @@ public class FlightController {
      * @return Flight details
      * @throws Exception
      */
-    @GetMapping
-    public ResponseEntity<GetFlightResponse> searchFlight(
-        @RequestParam(required = true) String origin,
-        @RequestParam(required = true) String destination,
-        @RequestParam(required = true) String date) {
+    @GetMapping("/flights")
+    public ResponseEntity<GetFlightResponse> searchFlights(
+        @RequestParam(name = "origin", required = false) String origin,
+        @RequestParam(name = "destination", required = false) String destination,
+        @RequestParam(name = "date", required = false) String date) {
 
         
         GetFlightResponse response = new GetFlightResponse();

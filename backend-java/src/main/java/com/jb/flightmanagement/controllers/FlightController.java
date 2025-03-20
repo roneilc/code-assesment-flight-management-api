@@ -163,7 +163,7 @@ public class FlightController {
      * @param bookingId  The ID of the booking to be cancelled.
      * @return ResponseEntity containing a message indicating success or failure.
      */
-    @DeleteMapping("/{id}/bookings/{bookingId}")
+    @DeleteMapping("flights/{id}/bookings/{bookingId}")
     public ResponseEntity<CancelBookingResponse> deleteBooking(
             @PathVariable("id") Long flightId,
             @PathVariable("bookingId") Long bookingId) {

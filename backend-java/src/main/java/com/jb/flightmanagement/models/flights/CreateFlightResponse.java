@@ -1,5 +1,6 @@
 package com.jb.flightmanagement.models.flights;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 // "id": 1,
@@ -7,6 +8,7 @@ import lombok.Data;
 // "status": "Scheduled"
 
 @Data
+@AllArgsConstructor
 public class CreateFlightResponse {
 
     private Long id;
@@ -14,12 +16,6 @@ public class CreateFlightResponse {
     private String flightNumber;
 
     private String status;
-
-    public CreateFlightResponse(Long id, String flightNumber, String status) {
-        this.id = id;
-        this.flightNumber = flightNumber;
-        this.status = status;
-    }
 
     public Long getId() {
         return id;

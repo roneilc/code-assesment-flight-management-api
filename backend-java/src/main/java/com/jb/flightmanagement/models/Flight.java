@@ -13,6 +13,17 @@ import lombok.Data;
 @Table(name = "flights")
 public class Flight {
 
+    public Flight(Long id, String flightNumber, String origin, String destination, int capacity, String status) {
+        this.id = id;
+        this.flightNumber = flightNumber;
+        this.origin = origin;
+        this.destination = destination;
+        this.capacity = capacity;
+        this.status = status;
+    }
+    public Flight() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

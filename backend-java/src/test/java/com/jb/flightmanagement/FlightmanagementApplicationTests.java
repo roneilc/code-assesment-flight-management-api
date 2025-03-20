@@ -1,23 +1,21 @@
 package com.jb.flightmanagement;
 
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jb.flightmanagement.models.flights.CreateFlightRequest;
 import com.jb.flightmanagement.models.flights.Flight;
 import com.jb.flightmanagement.services.FlightService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -26,7 +24,7 @@ class FlightmanagementApplicationTests {
 	@Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private FlightService flightService;
 
 	@Test
@@ -36,7 +34,7 @@ class FlightmanagementApplicationTests {
 	@Test
     void CreateFlight_Ok() throws Exception {
 
-        Flight mock = new Flight(1L, "EWR", "LAX", "JB-789", 100, "Scheduled");
+        Flight mock = new Flight(1L, "EWR", "LAX", "JB-789", "2025-03-15T10:00:00Z","2025-03-15T10:00:00Z",100, "Scheduled");
 
         when(flightService.createFlight(any(Flight.class))).thenReturn(mock);
 

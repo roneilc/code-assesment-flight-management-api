@@ -19,7 +19,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureMockMvc  // <-- This initializes MockMvc
+@AutoConfigureMockMvc
 @SpringBootTest
 class FlightmanagementApplicationTests {
 
@@ -45,7 +45,6 @@ class FlightmanagementApplicationTests {
 		ObjectMapper objectMapper = new ObjectMapper();
     	String jsonRequest = objectMapper.writeValueAsString(request);
 
-		// Send the request with content type and JSON payload
 		mockMvc.perform(post("/api/flights")
 				.contentType("application/json")
 				.content(jsonRequest))

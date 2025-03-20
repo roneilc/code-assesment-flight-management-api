@@ -1,5 +1,7 @@
 package com.jb.flightmanagement.controllers;
 
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jb.flightmanagement.models.BookFlightResponse;
 import com.jb.flightmanagement.models.CreateFlightRequest;
 import com.jb.flightmanagement.models.CreateFlightResponse;
+import com.jb.flightmanagement.models.Flight;
 import com.jb.flightmanagement.models.GetFlightResponse;
 import com.jb.flightmanagement.services.FlightService;
 
@@ -42,8 +45,7 @@ public class FlightController {
     @PostMapping("/flights")
     public ResponseEntity<CreateFlightResponse> createFlight(@Validated @RequestBody CreateFlightRequest request) {
 
-        // if(Stringrequest)
-        // _flightService.createFlight(id);
+        // _flightService.createFlight(request.getFlight());
 
         CreateFlightResponse response = new CreateFlightResponse(1,"JB-202","Scheduled");
         return ResponseEntity.ok(response);
@@ -57,11 +59,22 @@ public class FlightController {
      * @throws Exception
      */
     @GetMapping("/flights/{id}")
-    public ResponseEntity<GetFlightResponse> getFlight() {
+    public ResponseEntity<GetFlightResponse> getFlights(@PathVariable("id") Long id) {
 
+        Optional<Flight> flight = _flightService.getFlight(id);
 
         GetFlightResponse response = new GetFlightResponse();
-        return ResponseEntity.ok(response);
+
+        response.setFlight(flight);
+
+        if (flight.isPresent()) {
+            response.setFlight(flight);
+            response.setResponseMessage("Flight Found");
+            return ResponseEntity.ok(response);
+        } else {
+            response.setResponseMessage("Not found");
+            return ResponseEntity.ok(response);
+        }
     }
 
     /**

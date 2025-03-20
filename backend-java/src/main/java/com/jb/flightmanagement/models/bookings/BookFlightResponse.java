@@ -10,8 +10,7 @@ import lombok.Data;
 @Data
 public class BookFlightResponse {
 
-    private String passengerName;
-
-    private String seatClass;
+    private Long id;
+    private String status;
 
 }

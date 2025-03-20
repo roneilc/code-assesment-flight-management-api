@@ -1,11 +1,13 @@
 package com.jb.flightmanagement.models;
 
+import java.util.Optional;
+
 import lombok.Data;
 
 @Data
 public class GetFlightResponse {
 
-    private Flight flight;
+    private Optional<Flight> flight;
 
-    private String status;
+    private String responseMessage;
 }

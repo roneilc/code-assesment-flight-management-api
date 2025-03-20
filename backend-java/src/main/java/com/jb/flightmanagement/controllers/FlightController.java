@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jb.flightmanagement.models.bookings.BookFlightRequest;
 import com.jb.flightmanagement.models.bookings.BookFlightResponse;
+import com.jb.flightmanagement.models.bookings.Booking;
 import com.jb.flightmanagement.models.flights.CreateFlightRequest;
 import com.jb.flightmanagement.models.flights.CreateFlightResponse;
 import com.jb.flightmanagement.models.flights.Flight;
 import com.jb.flightmanagement.models.flights.GetFlightResponse;
+import com.jb.flightmanagement.services.BookingService;
 import com.jb.flightmanagement.services.FlightService;
 
 @RestController
@@ -26,9 +28,11 @@ import com.jb.flightmanagement.services.FlightService;
 public class FlightController {
 
     private final FlightService _flightService;
+    private final BookingService _bookingService;
 
-    public FlightController(FlightService flightService) {
+    public FlightController(FlightService flightService, BookingService bookingService) {
         this._flightService = flightService;
+        this._bookingService = bookingService;
     }
 
     /**
@@ -111,30 +115,42 @@ public class FlightController {
     /**
      * Method for booking flights
      * @param id Flight Id
-     * @return Flight details
+     * @param passengerName passenger name
+     * @param seatClass seat category (economy, business, firstclass)
+     * @return status
      * @throws Exception
      */
-    @PostMapping("/flights/{id}")
-    public ResponseEntity<GetFlightResponse> bookFlight() {
+    @PostMapping("/flights/{id}/bookings")
+    public ResponseEntity<BookFlightResponse> bookFlight(
+            @PathVariable("id") Long flightId,
+            @RequestBody BookFlightRequest request) {
 
-        GetFlightResponse response = new GetFlightResponse();
+         // Attempt to book flight
+        Booking booking = _bookingService.createBooking(flightId, request);
+
+        // Create response if successful
+        BookFlightResponse response = new BookFlightResponse(
+            booking.getId(),
+            booking.getStatus()
+        );
+
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * Method for cancelling flight
-     * @param id Flight Id
-     * @return Flight details
-     * @throws Exception
-     */
-    @DeleteMapping("/{id}/bookings/{bookingId}")
-    public ResponseEntity<BookFlightResponse> deleteBooking(
-            @PathVariable Long id,
-            @PathVariable Long bookingId) {
+    // /**
+    //  * Method for cancelling booking
+    //  * @param id Flight Id
+    //  * @return Flight details
+    //  * @throws Exception
+    //  */
+    // @DeleteMapping("/{id}/bookings/{bookingId}")
+    // public ResponseEntity<BookFlightResponse> deleteBooking(
+    //         @PathVariable Long id,
+    //         @PathVariable Long bookingId) {
 
-        BookFlightResponse response = new BookFlightResponse();
-        return ResponseEntity.ok(response);
+    //     BookFlightResponse response = new BookFlightResponse();
+    //     return ResponseEntity.ok(response);
 
-    }
+    // }
     
 }

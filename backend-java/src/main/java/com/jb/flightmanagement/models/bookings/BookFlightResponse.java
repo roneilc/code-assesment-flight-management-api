@@ -1,5 +1,6 @@
 package com.jb.flightmanagement.models.bookings;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 // {
@@ -8,9 +9,10 @@ import lombok.Data;
 //  }
 
 @Data
+@AllArgsConstructor
 public class BookFlightResponse {
 
-    private Long id;
+    private Long bookingId;
     private String status;
 
 }

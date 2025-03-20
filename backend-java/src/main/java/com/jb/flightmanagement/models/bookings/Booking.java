@@ -30,5 +30,5 @@ public class Booking {
 
     private String passengerName;
     private String seatClass;
-    private String bookingStatus;
+    private String status;
 }

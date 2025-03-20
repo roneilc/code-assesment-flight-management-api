@@ -42,7 +42,7 @@ public class BookingService {
         booking.setFlight(flight);
         booking.setPassengerName(request.getPassengerName());
         booking.setSeatClass(request.getSeatClass());
-        booking.setBookingStatus("Confirmed");
+        booking.setStatus("Confirmed");
 
         return bookingRepository.save(booking);
     }

@@ -34,4 +34,7 @@ public class Flight {
 
     @Column
     private int capacity;
+
+    @Column
+    private String status;
 }

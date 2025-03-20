@@ -2,6 +2,7 @@ package com.jb.flightmanagement.controllers;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,11 +46,23 @@ public class FlightController {
     @PostMapping("/flights")
     public ResponseEntity<CreateFlightResponse> createFlight(@Validated @RequestBody CreateFlightRequest request) {
 
-        // _flightService.createFlight(request.getFlight());
+        try {
+            // Attempt to save flight
+            Flight savedFlight = _flightService.createFlight(request.getFlight());
 
-        CreateFlightResponse response = new CreateFlightResponse(1,"JB-202","Scheduled");
-        return ResponseEntity.ok(response);
+            // Create response if successful
+            CreateFlightResponse response = new CreateFlightResponse(
+                    savedFlight.getId(),
+                    savedFlight.getFlightNumber(),
+                    savedFlight.getStatus()
+            );
 
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new CreateFlightResponse((long) 0, "", "Flight cannot be created"));
+        }
     }
 
     /**

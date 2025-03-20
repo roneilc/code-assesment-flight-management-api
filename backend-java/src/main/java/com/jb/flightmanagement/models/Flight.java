@@ -36,5 +36,5 @@ public class Flight {
     private int capacity;
 
     @Column
-    private String status;
+    private String status = "Scheduled";
 }

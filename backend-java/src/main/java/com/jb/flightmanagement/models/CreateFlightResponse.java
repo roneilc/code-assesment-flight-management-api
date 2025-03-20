@@ -9,23 +9,23 @@ import lombok.Data;
 @Data
 public class CreateFlightResponse {
 
-    private int id;
+    private Long id;
 
     private String flightNumber;
 
     private String status;
 
-    public CreateFlightResponse(int id, String flightNumber, String status) {
+    public CreateFlightResponse(Long id, String flightNumber, String status) {
         this.id = id;
         this.flightNumber = flightNumber;
         this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -16,9 +16,14 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
-    public void createFlight(Flight flight) {
-
-        flightRepository.save(flight);
+    public Flight createFlight(Flight flight) {
+        // Check if flight exists in database
+        if (flightRepository.findByFlightNumber(flight.getFlightNumber()).isPresent()) {
+            throw new IllegalArgumentException("Flight exists");
+        }
+        else {
+            return flightRepository.save(flight);
+        }
     }
 
     public Optional<Flight> getFlight(Long id) {
